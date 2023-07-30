@@ -10,7 +10,8 @@ import NewsModal from "components/popup/NewsModal";
 import ServiceModal from "components/popup/ServiceModal";
 import dynamic from "next/dynamic";
 import { Fragment, useContext, useEffect } from "react";
-const Portfolio = dynamic(() => import("components/Portfolio"), {
+import PasswordModal from "../components/popup/PasswordModal";
+const Portfolio = dynamic(() => import("@/src/components/News"), {
   ssr: false,
 });
 const Layout = ({ children }) => {
@@ -19,8 +20,13 @@ const Layout = ({ children }) => {
     tokyo.imageToSvg();
     tokyo.customCursor();
   }, []);
-  const { modal, serviceModal, newsModal, portfolioDetailsModal } =
-    useContext(TokyoContext);
+  const {
+    modal,
+    serviceModal,
+    newsModal,
+    passwordModal,
+    portfolioDetailsModal,
+  } = useContext(TokyoContext);
   return (
     <Fragment>
       <MediaPopup />
@@ -28,6 +34,7 @@ const Layout = ({ children }) => {
       {modal && serviceModal && <ServiceModal />}
       {modal && newsModal && <NewsModal />}
       {modal && portfolioDetailsModal && <DetailsModal />}
+      {modal && passwordModal && <PasswordModal />}
       {/* WRAPPER ALL */}
       <div className="tokyo_tm_all_wrap">
         {/* PRELOADER */}

@@ -1,7 +1,7 @@
 import { TokyoContext } from "@/src/Context";
 import useClickOutside from "@/src/useClickOutside";
 import { useContext } from "react";
-const ModalContainer = ({ children, nullValue }) => {
+const ModalContainer = ({ children, nullValue, type }) => {
   const { modalToggle } = useContext(TokyoContext);
   let domNode = useClickOutside(() => {
     modalToggle(false);
@@ -9,7 +9,10 @@ const ModalContainer = ({ children, nullValue }) => {
   });
   return (
     <div className="tokyo_tm_modalbox opened">
-      <div className="box_inner" ref={domNode}>
+      <div
+        className={type === "password" ? "password" : " box_inner"}
+        ref={domNode}
+      >
         <div className="close">
           <a
             href="#"
@@ -21,6 +24,7 @@ const ModalContainer = ({ children, nullValue }) => {
             <i className="icon-cancel" />
           </a>
         </div>
+
         <div className="description_wrap">{children}</div>
       </div>
     </div>
